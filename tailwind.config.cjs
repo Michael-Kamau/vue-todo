@@ -5,7 +5,11 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,vue}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'desktop-light': "url('/src/assets/images/bg-desktop-dark.jpg')",
+      }
+    },
   },
   plugins: [],
 }
