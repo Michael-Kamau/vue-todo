@@ -40,6 +40,9 @@ export default {
 
         clearCompleted(state) {
             state.todos = state.todos.filter(todo => !todo.complete)
+        },
+        reOrderElements(state, todos) {
+            state.todos = todos
         }
     },
     actions: {
@@ -57,6 +60,31 @@ export default {
         },
         clearCompleted({commit}) {
             commit('clearCompleted');
+        },
+
+        reOrderElements({state, commit}, {a, b}) {
+
+            let todos = state.todos
+
+            const index_a = todos.findIndex(object => {
+                return object.title === a;
+            });
+
+            const index_b = todos.findIndex(object => {
+                return object.title === b;
+            });
+
+
+            if (index_a > -1 && index_b > -1) {
+                let temp = todos[index_a]
+
+                todos.splice(index_a, 1)
+                todos.splice(index_b, b, temp)
+
+                commit('reOrderElements', todos);
+            }
+
         }
     }
+
 }

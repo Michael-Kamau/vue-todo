@@ -41,12 +41,19 @@
         <div class="divide-y divide-gray-200 dark:divide-gray-600">
           <div v-for="item in todos(type)"
                draggable="true"
+               @dragstart="startDrag($event, item)"
+               @drop="onDrop($event, item)"
+               @dragenter.prevent
+               @dragover.prevent
                class="item flex justify-between items-center py-5 px-4  text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-800 font-normal">
            <span class="flex items-center space-x-4 ">
              <div
                  class="flex items-center justify-center h-5 w-5 rounded-full bg-gray-400 hover:bg-gradient-to-r hover:from-sky-400 hover:to-violet-500 cursor-pointer"
                  :class="item.complete ?'bg-gradient-to-r from-sky-400 to-violet-500':''"
-                 @click="markComplete(item.title)" id="completeButton">
+                 @click="markComplete(item.title)"
+                 id="completeButton"
+
+             >
                <div v-if="item.complete == false"
                     class="bg-white dark:bg-gray-800 h-[1.15rem] w-[1.15rem] rounded-full m-auto"></div>
                <img v-else src="../assets/images/ICON-CHECK.SVG" class="w-2 h-2 col-span-1 bg-red">
@@ -113,12 +120,27 @@ export default {
       }
 
     },
+
+    startDrag(event, item) {
+      event.dataTransfer.dropEffect = 'move'
+      event.dataTransfer.effectAllowed = 'move'
+      event.dataTransfer.setData('itemTitle', item.title)
+
+    },
+
+    onDrop(event, item) {
+      const itemTitle = event.dataTransfer.getData('itemTitle')
+      if (itemTitle !== item.title) {
+        this.reOrderElements({a: itemTitle, b: item.title})
+      }
+    },
     ...mapActions({
       'addTodo': 'todos/addTodo',
       'markComplete': 'todos/markComplete',
       'deleteTodo': 'todos/deleteTodo',
       'clearCompleted': 'todos/clearCompleted',
       'toggleTheme': 'toggleTheme',
+      'reOrderElements': 'todos/reOrderElements'
     })
   }
 }
