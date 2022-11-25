@@ -56,13 +56,13 @@
              >
                <div v-if="item.complete == false"
                     class="bg-white dark:bg-gray-800 h-[1.15rem] w-[1.15rem] rounded-full m-auto"></div>
-               <img v-else src="../assets/images/ICON-CHECK.SVG" class="w-2 h-2 col-span-1 bg-red">
+               <img v-else src="../assets/images/ICON-CHECK.png" class="w-2 h-2 col-span-1 bg-red">
             </div>
 
              <p class="col-span-4 cursor-pointer hover:scale-105"
                 :class="item.complete ?'line-through text-gray-400 dark:text-gray-600':''">{{ item.title }}</p>
            </span>
-            <img id="clearComplete" src="../assets/images/ICON-CROSS.SVG"
+            <img id="clearComplete" src="../assets/images/ICON-CROSS.png"
                  class="w-4 h-4 cursor-pointer transform duration-30 hover:scale-105"
                  @click="deleteTodo(item.title)">
           </div>
