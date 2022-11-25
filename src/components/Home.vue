@@ -28,7 +28,7 @@
         m-0
         focus:text-white focus:bg-gray-800  focus:border-blue-600 focus:outline-none
       "
-          id="exampleText0"
+          id="todoInput"
           placeholder="Create a new todo..."
           v-model="todo"
           v-on:keyup.enter="addItem"
@@ -41,20 +41,20 @@
            <span class="flex items-center space-x-4">
              <div
                  class="flex items-center justify-center h-5 w-5 rounded-full bg-gradient-to-r from-sky-400 to-violet-500 cursor-pointer"
-                 @click="markComplete(item.title)">
+                 @click="markComplete(item.title)" id="completeButton">
                <div v-if="item.complete == false" class="bg-gray-800 h-4 w-4 rounded-full m-auto"></div>
                <img v-else src="../assets/images/ICON-CHECK.SVG" class="w-2 h-2 col-span-1 bg-red">
             </div>
 
              <p class="col-span-4" :class="item.complete ?'line-through':''">{{ item.title }}</p>
            </span>
-              <img src="../assets/images/ICON-CROSS.SVG"
+              <img id="clearComplete" src="../assets/images/ICON-CROSS.SVG"
                    class="w-4 h-4 cursor-pointer transform duration-30 hover:scale-105"
                    @click="deleteTodo(item.title)">
             </div>
             <div
                 class="flex justify-between items-center py-4 px-2  text-white bg-gray-800 text-gray-400 rounded-b text-xs font-semibold">
-              <p>{{ todos('active').length }} items left</p>
+              <p id="itemsLeft">{{ todos('active').length }} items left</p>
               <div class="flex space-x-2">
                 <p class="cursor-pointer hover:text-white" :class="{ 'text-blue-400' : type=='all' }"
                    @click="type='all'">
