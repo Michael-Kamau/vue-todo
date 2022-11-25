@@ -37,11 +37,12 @@
           v-on:keyup.enter="addItem"
       />
 
-      <section class="w-full mx-auto my-5 divide-y divide-gray-600">
-        <div>
+      <section class="w-full mx-auto my-5 ">
+        <div class="divide-y divide-gray-200 dark:divide-gray-600">
           <div v-for="item in todos(type)"
+               draggable="true"
                class="item flex justify-between items-center py-5 px-4  text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-800 font-normal">
-           <span class="flex items-center space-x-4">
+           <span class="flex items-center space-x-4 ">
              <div
                  class="flex items-center justify-center h-5 w-5 rounded-full bg-gray-400 hover:bg-gradient-to-r hover:from-sky-400 hover:to-violet-500 cursor-pointer"
                  :class="item.complete ?'bg-gradient-to-r from-sky-400 to-violet-500':''"
@@ -51,7 +52,7 @@
                <img v-else src="../assets/images/ICON-CHECK.SVG" class="w-2 h-2 col-span-1 bg-red">
             </div>
 
-             <p @click="markComplete(item.title)" class="col-span-4 cursor-pointer hover:scale-105"
+             <p class="col-span-4 cursor-pointer hover:scale-105"
                 :class="item.complete ?'line-through text-gray-400 dark:text-gray-600':''">{{ item.title }}</p>
            </span>
             <img id="clearComplete" src="../assets/images/ICON-CROSS.SVG"
