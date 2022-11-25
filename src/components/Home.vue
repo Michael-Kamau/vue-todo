@@ -1,12 +1,12 @@
 <template>
-  <div class="flex flex-col  bg-gray-900 min-h-screen">
-    <div class="h-52 w-full bg-desktop-light absolute"></div>
+  <div class="flex flex-col  bg-gray-100 dark:bg-gray-900 min-h-screen">
+    <div
+        class="h-52 w-full bg-cover bg-no-repeat bg-mobile-light dark:bg-mobile-dark md:bg-desktop-light dark:md:bg-desktop-dark absolute"></div>
 
     <div class="w-4/5 sm:w-2/3 md:w-2/4 mx-auto py-4 z-10">
       <div class="flex justify-between items-center">
-        <h1 class=" text-white text-3xl font-bold my-6">TODO</h1>
-        <img src="../assets/images/ICON-SUN.SVG" alt="" class="h-6 w-6">
-
+        <h1 class=" text-white text-3xl font-bold my-8">TODO</h1>
+        <div class="w-6 h-7 bg-no-repeat bg-moon-icon dark:bg-sun-icon cursor-pointer" @click="toggleTheme()"></div>
       </div>
       <input
           type="text"
@@ -20,13 +20,16 @@
         py-4
         text-base
         font-normal
-        text-white
-        bg-gray-800 bg-clip-padding
+        text-gray-600
+        dark:text-gray-300
+        dark:bg-gray-800
         rounded
         transition
         ease-in-out
         m-0
-        focus:text-white focus:bg-gray-800  focus:border-blue-600 focus:outline-none
+        dark:focus:text-gray-300
+        dark:focus:bg-gray-800
+        focus:outline-none
       "
           id="todoInput"
           placeholder="Create a new todo..."
@@ -35,40 +38,47 @@
       />
 
       <section class="w-full mx-auto my-5 divide-y divide-gray-600">
-          <div>
-            <div v-for="item in todos(type)"
-                 class="item flex justify-between items-center py-5 px-2  text-white bg-gray-800 ">
+        <div>
+          <div v-for="item in todos(type)"
+               class="item flex justify-between items-center py-5 px-4  text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-800 font-normal">
            <span class="flex items-center space-x-4">
              <div
-                 class="flex items-center justify-center h-5 w-5 rounded-full bg-gradient-to-r from-sky-400 to-violet-500 cursor-pointer"
+                 class="flex items-center justify-center h-5 w-5 rounded-full bg-gray-400 hover:bg-gradient-to-r hover:from-sky-400 hover:to-violet-500 cursor-pointer"
+                 :class="item.complete ?'bg-gradient-to-r from-sky-400 to-violet-500':''"
                  @click="markComplete(item.title)" id="completeButton">
-               <div v-if="item.complete == false" class="bg-gray-800 h-4 w-4 rounded-full m-auto"></div>
+               <div v-if="item.complete == false"
+                    class="bg-white dark:bg-gray-800 h-[1.15rem] w-[1.15rem] rounded-full m-auto"></div>
                <img v-else src="../assets/images/ICON-CHECK.SVG" class="w-2 h-2 col-span-1 bg-red">
             </div>
 
-             <p class="col-span-4" :class="item.complete ?'line-through':''">{{ item.title }}</p>
+             <p @click="markComplete(item.title)" class="col-span-4 cursor-pointer hover:scale-105"
+                :class="item.complete ?'line-through text-gray-400 dark:text-gray-600':''">{{ item.title }}</p>
            </span>
-              <img id="clearComplete" src="../assets/images/ICON-CROSS.SVG"
-                   class="w-4 h-4 cursor-pointer transform duration-30 hover:scale-105"
-                   @click="deleteTodo(item.title)">
+            <img id="clearComplete" src="../assets/images/ICON-CROSS.SVG"
+                 class="w-4 h-4 cursor-pointer transform duration-30 hover:scale-105"
+                 @click="deleteTodo(item.title)">
+          </div>
+          <div
+              class="flex justify-between items-center py-4 px-4  dark:text-gray-300 bg-white dark:bg-gray-800 text-gray-400 dark:text-gray-300 rounded-b text-xs font-semibold">
+            <p id="itemsLeft" class="font-normal">{{ todos('active').length }} items left</p>
+            <div class="flex space-x-2 mx-1">
+              <p class="cursor-pointer hover:text-gray-500 dark:hover:text-gray-100 hover:scale-105"
+                 :class="{ 'text-blue-400' : type=='all' }"
+                 @click="type='all'">
+                All</p>
+              <p class="cursor-pointer hover:text-gray-500 dark:hover:text-gray-100 hover:scale-105"
+                 :class="{ 'text-blue-400' : type=='active' }"
+                 @click="type='active'">Active</p>
+              <p class="cursor-pointer hover:text-gray-500 dark:hover:text-gray-100 hover:scale-105"
+                 :class="{ 'text-blue-400' : type=='complete' }"
+                 @click="type='complete'">Completed</p>
             </div>
-            <div
-                class="flex justify-between items-center py-4 px-2  text-white bg-gray-800 text-gray-400 rounded-b text-xs font-semibold">
-              <p id="itemsLeft">{{ todos('active').length }} items left</p>
-              <div class="flex space-x-2">
-                <p class="cursor-pointer hover:text-white" :class="{ 'text-blue-400' : type=='all' }"
-                   @click="type='all'">
-                  All</p>
-                <p class="cursor-pointer hover:text-white hover:scale-105" :class="{ 'text-blue-400' : type=='active' }"
-                   @click="type='active'">Active</p>
-                <p class="cursor-pointer hover:text-white" :class="{ 'text-blue-400' : type=='complete' }"
-                   @click="type='complete'">Completed</p>
-              </div>
-              <p class="cursor-pointer  hover:text-gray-100" @click="clearCompleted">Clear Completed</p>
-
-            </div>
+            <p class="cursor-pointer hover:text-gray-500 dark:hover:text-gray-100 font-normal" @click="clearCompleted">
+              Clear Completed</p>
 
           </div>
+
+        </div>
 
       </section>
 
@@ -107,6 +117,7 @@ export default {
       'markComplete': 'todos/markComplete',
       'deleteTodo': 'todos/deleteTodo',
       'clearCompleted': 'todos/clearCompleted',
+      'toggleTheme': 'toggleTheme',
     })
   }
 }
@@ -114,5 +125,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+section .item:first-child {
+  @apply rounded-t;
+}
 
 </style>

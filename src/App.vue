@@ -1,11 +1,23 @@
-<script setup>
+<template>
+  <div :class="{ dark: darkThemeEnabled }">
+    <Home/>
+  </div>
+</template>
+<script>
 
 import Home from './components/Home.vue'
-</script>
+import {mapGetters} from "vuex";
 
-<template>
-  <Home />
-</template>
+export default {
+  components: {Home},
+  computed: {
+    ...mapGetters({
+      'darkThemeEnabled': 'darkThemeEnabled',
+    })
+  },
+
+}
+</script>
 
 <style scoped>
 

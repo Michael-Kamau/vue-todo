@@ -6,10 +6,22 @@ import todos from "./modules/todos.js";
 const store = createStore({
     state() {
         return {
+            darkTheme:false
         }
     },
-    mutations: {},
-
+    getters: {
+        darkThemeEnabled: (state) => state.darkTheme
+    },
+    mutations: {
+        toggleTheme(state) {
+            state.darkTheme = !state.darkTheme
+        },
+    },
+    actions:{
+        toggleTheme({commit}) {
+            commit('toggleTheme');
+        },
+    },
     modules:{
         todos
     }
