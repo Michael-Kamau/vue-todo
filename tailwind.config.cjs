@@ -13,7 +13,10 @@ module.exports = {
         'mobile-dark': "url('/src/assets/images/BG-MOBILE-DARK.jpg')",
         'moon-icon': "url('/src/assets/images/ICON-MOON.SVG')",
         'sun-icon': "url('/src/assets/images/ICON-SUN.SVG')",
-      }
+      },
+      fontFamily: {
+        'rubik': ['Rubik', 'sans-serif'],
+      },
     },
   },
   plugins: [],
