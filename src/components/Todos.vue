@@ -1,13 +1,16 @@
 <template>
   <section class="w-full mx-auto my-5 ">
+
     <div class="divide-y divide-gray-200 dark:divide-gray-600">
-      <div v-for="item in todos(type)"
-           draggable="true"
-           @dragstart="startDrag($event, item)"
-           @drop="onDrop($event, item)"
-           @dragenter.prevent
-           @dragover.prevent
-           class="item flex justify-between items-center py-5 px-4  text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-800 font-normal">
+      <TransitionGroup name="todos" tag="div" class="divide-y divide-gray-200 dark:divide-gray-600">
+        <div v-for="(item, index) in todos(type)"
+             :key="index"
+             draggable="true"
+             @dragstart="startDrag($event, item)"
+             @drop="onDrop($event, item)"
+             @dragenter.prevent
+             @dragover.prevent
+             class="item flex justify-between items-center py-5 px-4  text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-800 font-normal">
            <span class="flex items-center space-x-4 ">
              <div
                  class="flex items-center justify-center h-5 w-5 rounded-full bg-gray-400 hover:bg-gradient-to-r hover:from-sky-400 hover:to-violet-500 cursor-pointer"
@@ -24,10 +27,12 @@
              <p class="col-span-4 cursor-pointer hover:scale-105"
                 :class="item.complete ?'line-through text-gray-400 dark:text-gray-600':''">{{ item.title }}</p>
            </span>
-        <img id="clearComplete" src="../assets/images/ICON-CROSS.png"
-             class="w-4 h-4 cursor-pointer transform duration-30 hover:scale-105"
-             @click="deleteTodo(item.title)">
-      </div>
+          <img id="clearComplete" src="../assets/images/ICON-CROSS.png"
+               class="w-4 h-4 cursor-pointer transform duration-30 hover:scale-105"
+               @click="deleteTodo(item.title)">
+        </div>
+      </TransitionGroup>
+
       <div
           class="flex justify-between items-center py-4 px-2 sm:px-4  dark:text-gray-300 bg-white dark:bg-gray-800 text-gray-400 dark:text-gray-300 rounded-b text-xs font-semibold">
         <p id="itemsLeft" class="font-normal">{{ todos('active').length }} items left</p>
@@ -99,6 +104,14 @@ export default {
 <style scoped lang="scss">
 section .item:first-child {
   @apply rounded-t;
+}
+
+.todos-enter-active{
+  transition: all 0.5s ease;
+}
+.todos-enter-from, {
+  opacity: 0;
+  transform: translateX(30px);
 }
 
 </style>

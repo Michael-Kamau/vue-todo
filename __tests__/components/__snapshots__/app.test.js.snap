@@ -57,8 +57,18 @@ exports[`suite > snap shot matches 1`] = `
                 class="divide-y divide-gray-200 dark:divide-gray-600"
                 data-v-de4ea765=""
               >
-                
-                
+                <transition-group-stub
+                  appear="false"
+                  class="divide-y divide-gray-200 dark:divide-gray-600"
+                  css="true"
+                  data-v-de4ea765=""
+                  name="todos"
+                  persisted="false"
+                  tag="div"
+                >
+                  
+                  
+                </transition-group-stub>
                 <div
                   class="flex justify-between items-center py-4 px-2 sm:px-4 dark:text-gray-300 bg-white dark:bg-gray-800 text-gray-400 dark:text-gray-300 rounded-b text-xs font-semibold"
                   data-v-de4ea765=""
@@ -161,8 +171,18 @@ exports[`suite > snap shot matches 1`] = `
               class="divide-y divide-gray-200 dark:divide-gray-600"
               data-v-de4ea765=""
             >
-              
-              
+              <transition-group-stub
+                appear="false"
+                class="divide-y divide-gray-200 dark:divide-gray-600"
+                css="true"
+                data-v-de4ea765=""
+                name="todos"
+                persisted="false"
+                tag="div"
+              >
+                
+                
+              </transition-group-stub>
               <div
                 class="flex justify-between items-center py-4 px-2 sm:px-4 dark:text-gray-300 bg-white dark:bg-gray-800 text-gray-400 dark:text-gray-300 rounded-b text-xs font-semibold"
                 data-v-de4ea765=""

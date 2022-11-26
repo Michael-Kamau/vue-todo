@@ -1,7 +1,16 @@
-# Vue 3 + Vite
+# Vue 3 + Vite + Tailwind
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-## Recommended IDE Setup
+Vue todo Application where users can:
+- View the optimal layout for the app depending on their device's screen size
+- See hover states for all interactive elements on the page
+- Add new todos to the list
+- Mark todos as complete
+- Delete todos from the list
+- Filter by all/active/complete todos
+- Clear all completed todos
+- Toggle light and dark mode
+- Drag and drop to reorder items on the list
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+
+
