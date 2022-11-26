@@ -2,7 +2,7 @@ import {assert, describe, it, expect, beforeEach} from 'vitest'
 import {render, screen} from "@testing-library/vue";
 import { mount } from '@vue/test-utils'
 
-import Home from "../../src/components/Home.vue";
+import App from "../../src/App.vue";
 import store from "../../src/store/index.js";
 
 
@@ -10,7 +10,7 @@ describe('suite', () => {
     let wrapper
 
     beforeEach(() => {
-        wrapper = render(Home, {
+        wrapper = render(App, {
             global: {
                 plugins: [store]
             }
@@ -22,7 +22,7 @@ describe('suite', () => {
     });
 
     it('A todo item can be added to the list', async () => {
-        const wrapper = mount(Home,{
+        const wrapper = mount(App,{
             global: {
                 plugins: [store]
             }
@@ -41,7 +41,7 @@ describe('suite', () => {
     })
 
     it('A todo item can be marked as complete', async () => {
-        const wrapper = mount(Home,{
+        const wrapper = mount(App,{
             global: {
                 plugins: [store]
             }
@@ -64,7 +64,7 @@ describe('suite', () => {
 
 
     it('A user can clear all completed items', async () => {
-        const wrapper = mount(Home,{
+        const wrapper = mount(App,{
             global: {
                 plugins: [store]
             }
